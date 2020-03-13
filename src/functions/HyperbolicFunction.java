@@ -3,9 +3,9 @@ package functions;
 public class HyperbolicFunction implements Function {
 
     @Override
-    public double calculateY(double x)
+    public double getY(double x)
     {
-        return 4 / x;
+        return 1 / x;
     }
 
 }

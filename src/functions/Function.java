@@ -2,6 +2,6 @@ package functions;
 
 public interface Function {
 
-    double calculateY(double x);
+    double getY(double x);
 
 }

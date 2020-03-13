@@ -2,7 +2,7 @@ package functions;
 
 public class LogFunction implements Function {
     @Override
-    public double calculateY(double x) {
+    public double getY(double x) {
         return Math.log(x);
     }
 }
