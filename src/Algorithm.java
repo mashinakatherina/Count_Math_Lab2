@@ -2,7 +2,7 @@ import functions.Function;
 
 public class Algorithm {
 
-    private static final double EPSILON = 1e-9;
+    private static final double EPS = 1e-9;
 
     public static double[] calculate(Function function, double lowLimit, double upLimit, double accuracy) {
         int amountOfDivisions = 2;
@@ -11,20 +11,20 @@ public class Algorithm {
 
         double lowValue = function.getY(lowLimit);
         if (!Double.isFinite(lowValue))
-            lowValue = function.getY(lowLimit + EPSILON);
+            lowValue = function.getY(lowLimit + EPS);
 
         double upValue = function.getY(upLimit);
         if (!Double.isFinite(lowValue))
-            upValue = function.getY(upLimit - EPSILON);
+            upValue = function.getY(upLimit - EPS);
 
         double value = 4 * function.getY(lowLimit + step);
         if (!Double.isFinite(value))
-            value = 4 *(function.getY((lowLimit + step + EPSILON)) + function.getY(lowLimit + step - EPSILON))/2;
+            value = 4 *(function.getY((lowLimit + step + EPS)) + function.getY(lowLimit + step - EPS))/2;
 
         double previousValue = (step / 3)*(lowValue + value + upValue);
         double currentValue = 0;
 
-        while (error > accuracy && amountOfDivisions < 1000000000) {
+        while (error > accuracy && amountOfDivisions <999999999) {
 
             amountOfDivisions *= 2;
             step = (upLimit - lowLimit)/amountOfDivisions;
@@ -47,24 +47,24 @@ public class Algorithm {
             currentValue = function.getY(lowLimit + step*(i-1));
             if (!Double.isFinite(currentValue))
                 if (i==0)
-                    currentValue = function.getY(lowLimit + EPSILON);
+                    currentValue = function.getY(lowLimit + EPS);
                 else
-                    currentValue = (function.getY(lowLimit + step*(i-1) + EPSILON) + function.getY(lowLimit + step*(i-1) - EPSILON))/2;
+                    currentValue = (function.getY(lowLimit + step*(i-1) + EPS) + function.getY(lowLimit + step*(i-1) - EPS))/2;
             tmp += currentValue;
 
 
             currentValue = function.getY(lowLimit + step*i);
             if (!Double.isFinite(currentValue))
-                currentValue = (function.getY(lowLimit + step*i + EPSILON) + function.getY(lowLimit + step*i - EPSILON))/2;
+                currentValue = (function.getY(lowLimit + step*i + EPS) + function.getY(lowLimit + step*i - EPS))/2;
             tmp += 4 * currentValue;
 
 
             currentValue = function.getY(lowLimit + step*(i+1));
             if (!Double.isFinite(currentValue))
                 if (i==stepCounter)
-                    currentValue = function.getY(lowLimit + EPSILON);
+                    currentValue = function.getY(lowLimit + EPS);
                 else
-                    currentValue = (function.getY(lowLimit + step*(i+1) + EPSILON) + function.getY(lowLimit + step*(i+1) - EPSILON))/2;
+                    currentValue = (function.getY(lowLimit + step*(i+1) + EPS) + function.getY(lowLimit + step*(i+1) - EPS))/2;
             tmp += currentValue;
 
             result += tmp;
