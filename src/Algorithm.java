@@ -39,33 +39,33 @@ public class Algorithm {
     private static double calculateSum(Function function, double stepCounter,  double step, double lowLimit){
         double result = 0;
 
-        double value;
+        double currentValue;
         for (int i = 0; i < stepCounter; i+=2){
 
             double tmp = 0;
 
-            value = function.getY(lowLimit + step*(i-1));
-            if (!Double.isFinite(value))
+            currentValue = function.getY(lowLimit + step*(i-1));
+            if (!Double.isFinite(currentValue))
                 if (i==0)
-                    value = function.getY(lowLimit + EPSILON);
+                    currentValue = function.getY(lowLimit + EPSILON);
                 else
-                    value = (function.getY(lowLimit + step*(i-1) + EPSILON) + function.getY(lowLimit + step*(i-1) - EPSILON))/2;
-            tmp += value;
+                    currentValue = (function.getY(lowLimit + step*(i-1) + EPSILON) + function.getY(lowLimit + step*(i-1) - EPSILON))/2;
+            tmp += currentValue;
 
 
-            value = function.getY(lowLimit + step*i);
-            if (!Double.isFinite(value))
-                value = (function.getY(lowLimit + step*i + EPSILON) + function.getY(lowLimit + step*i - EPSILON))/2;
-            tmp += 4 * value;
+            currentValue = function.getY(lowLimit + step*i);
+            if (!Double.isFinite(currentValue))
+                currentValue = (function.getY(lowLimit + step*i + EPSILON) + function.getY(lowLimit + step*i - EPSILON))/2;
+            tmp += 4 * currentValue;
 
 
-            value = function.getY(lowLimit + step*(i+1));
-            if (!Double.isFinite(value))
+            currentValue = function.getY(lowLimit + step*(i+1));
+            if (!Double.isFinite(currentValue))
                 if (i==stepCounter)
-                    value = function.getY(lowLimit + EPSILON);
+                    currentValue = function.getY(lowLimit + EPSILON);
                 else
-                    value = (function.getY(lowLimit + step*(i+1) + EPSILON) + function.getY(lowLimit + step*(i+1) - EPSILON))/2;
-            tmp += value;
+                    currentValue = (function.getY(lowLimit + step*(i+1) + EPSILON) + function.getY(lowLimit + step*(i+1) - EPSILON))/2;
+            tmp += currentValue;
 
             result += tmp;
         }
