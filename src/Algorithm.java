@@ -3,11 +3,11 @@ import functions.Function;
 public class Algorithm {
 
     private static final double EPS = 1e-9;
-
-    public static double[] calculate(Function function, double lowLimit, double upLimit, double accuracy) {
-        int amountOfDivisions = 2;
-        double error = 2;
-        double step = (upLimit - lowLimit)/amountOfDivisions;
+    private static final int MAX_VALUE_OfDivisions = 999999999;
+    public static double[] integrate(Function function, double lowLimit, double upLimit, double accuracy) {
+        int countOfDivisions = 2;
+        double measurementError = 2;
+        double step = (upLimit - lowLimit)/countOfDivisions;
 
         double lowValue = function.getY(lowLimit);
         if (!Double.isFinite(lowValue))
@@ -24,19 +24,19 @@ public class Algorithm {
         double previousValue = (step / 3)*(lowValue + value + upValue);
         double currentValue = 0;
 
-        while (error > accuracy && amountOfDivisions <999999999) {
+        while (measurementError > accuracy && countOfDivisions < MAX_VALUE_OfDivisions) {
 
-            amountOfDivisions *= 2;
-            step = (upLimit - lowLimit)/amountOfDivisions;
-            currentValue = (step / 3)*(calculateSum(function,amountOfDivisions, step, lowLimit));
-            error = (Math.abs(currentValue - previousValue)/15);
+            countOfDivisions *= 2;
+            step = (upLimit - lowLimit)/countOfDivisions;
+            currentValue = (step / 3)*(countSum(function,countOfDivisions, step, lowLimit));
+            measurementError = (Math.abs(currentValue - previousValue)/15);
             previousValue = currentValue;
         }
 
-        return new double[]{ currentValue, amountOfDivisions, error};
+        return new double[]{ currentValue, countOfDivisions, measurementError};
     }
 
-    private static double calculateSum(Function function, double stepCounter,  double step, double lowLimit){
+    private static double countSum(Function function, double stepCounter, double step, double lowLimit){
         double result = 0;
 
         double currentValue;

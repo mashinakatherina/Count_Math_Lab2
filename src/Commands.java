@@ -53,21 +53,21 @@ public class Commands {
         }
 
         if (upperLimit == lowerLimit){
-            System.out.println("Limits are equal. Integral is zero.");
+            System.out.println(colorize("[[RED]]Limits are equal. Integral is zero.[[RESET]]"));
             return;
         }
 
 
-        double result[] = Algorithm.calculate(function, lowerLimit, upperLimit, accuracy);
+        double result[] = Algorithm.integrate(function, lowerLimit, upperLimit, accuracy);
         if (Double.isFinite(result[0])) {
             if  (!isIntervalValid) result[0] *= -1;
             if (result[2] < accuracy)
-                System.out.println(" Integral  is: " + result[0] +
-                        "\n Amount of divisions is: " + result[1] +
-                        "\n Error is: " + result[1 + 1]);
-            else System.out.println("Cannot get accuracy");
+                System.out.println(colorize(" [[BLUE]]Integral: [[RESET]]" + result[0] +
+                        "\n[[BLUE]] Amount of divisions: [[RESET]]" + result[1] +
+                        "\n[[BLUE]] Measurement error: [[RESET]]" + result[1 + 1]));
+            else System.out.println(colorize("[[RED]]Cannot get accuracy[[RESET]]"));
         }
-        else System.out.println("Integral is not convergence");
+        else System.out.println(colorize("[[RED]]Integral is not convergence[[RESET]]"));
 
 
     }
