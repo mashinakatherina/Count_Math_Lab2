@@ -67,7 +67,7 @@ public class Commands {
                         "\n[[BLUE]] Measurement error: [[RESET]]" + result[1 + 1]));
             else System.out.println(colorize("[[RED]]Cannot get accuracy[[RESET]]"));
         }
-        else System.out.println(colorize("[[RED]]Integral is not convergence[[RESET]]"));
+        else System.out.println(colorize("[[RED]]Integral does not converge[[RESET]]"));
 
 
     }
