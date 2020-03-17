@@ -25,7 +25,7 @@ public class Commands {
 
     private static void manualInput() {
 
-        System.out.println("Choose on of these functions. Type number of function you want to integrate \n" +
+        System.out.println("Choose one of these functions. Type number of function you want to integrate \n" +
                 "1) y = 2x + 5 \n" +
                 "2) y = 1 / x \n" +
                 "3) y = x^2 \n" +
